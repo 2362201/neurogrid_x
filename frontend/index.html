@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NeuroGrid-X Dashboard</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background:#0f172a;
+            color:white;
+            text-align:center;
+            padding-top:50px;
+        }
+
+        .card{
+            width:400px;
+            margin:auto;
+            background:#1e293b;
+            padding:30px;
+            border-radius:20px;
+        }
+
+        button{
+            padding:12px 20px;
+            border:none;
+            border-radius:10px;
+            background:#38bdf8;
+            color:white;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        h1{
+            color:#38bdf8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h1>NeuroGrid-X</h1>
+
+    <h2 id="producer">Producer: --</h2>
+    <h2 id="consumer">Consumer: --</h2>
+    <h2 id="profit">Trader Profit: --</h2>
+
+    <button onclick="runSimulation()">
+        Run AI Simulation
+    </button>
+
+</div>
+
+<script>
+
+async function runSimulation(){
+
+    const response = await fetch("http://127.0.0.1:5000/simulate");
+
+    const data = await response.json();
+
+    document.getElementById("producer").innerText =
+        "Producer: " + data.producer_power;
+
+    document.getElementById("consumer").innerText =
+        "Consumer: " + data.consumer_demand;
+
+    document.getElementById("profit").innerText =
+        "Trader Profit: " + data.trader_profit;
+}
+
+</script>
+
+</body>
+</html>
